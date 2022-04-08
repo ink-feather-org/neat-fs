@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "outDir": "./dist",
+    "module": "esnext",
+    "target": "es5",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    "baseUrl": ".",
+    "strict": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "stripInternal": true,
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ]
+  },
+  "include": [
+    "webpack.config.js",
+    "babel.config.js",
+    ".eslintrc.js",
+    "src/**/*.ts",
+    "test/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "typedocOptions": {
+      "entryPoints": ["src/index.ts"],
+      "out": "docs",
+      "readme": "README.adoc",
+      "excludePrivate": true,
+      "plugin": [ "@ink-feather-org/typedoc-plugin-asciidoctor" ]
+  }
+}

@@ -1,0 +1,10 @@
+= @ink-feather-org/neat-fs-backend-idb
+:icons:
+:y: &#x2705;
+:n: &#10060;
+
+https://ink-feather-org.github.io/neat-fs/backends/backend-idb/docs/[Typedoc]
+
+An indexed db based backend for neat-fs.
+
+== Usage

@@ -1,0 +1,23 @@
+= @ink-feather-org/neat-fs
+
+This monorepo hosts packages related to the neat-fs package.
+You can find them in the `libs` and the `backends` folders.
+
+== https://ink-feather-org.github.io/neat-fs/[Docs]
+
+== packages
+
+* neat-fs
+  https://github.com/ink-feather-org/neat-fs/blob/gh-pages/libs/neat-fs/README.adoc[README]
+  https://ink-feather-org.github.io/neat-fs/libs/neat-fs/docs/[Typedoc]
+* neat-fs-backend-idb https://github.com/ink-feather-org/neat-fs/blob/gh-pages/backends/backend-idb/README.adoc[README]
+  https://ink-feather-org.github.io/neat-fs/backends/backend-idb/docs/[Typedoc]
+
+== Building
+
+After installing rush run:
+
+[source, shell]
+----
+pnpm rush build
+----

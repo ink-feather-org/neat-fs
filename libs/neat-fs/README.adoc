@@ -1,0 +1,16 @@
+= @ink-feather-org/neat-fs
+:icons:
+:y: &#x2705;
+:n: &#10060;
+
+https://ink-feather-org.github.io/neat-fs/libs/neat-fs/docs/[Typedoc]
+
+A neat and fast 'fs' for the browser.
+
+== Usage
+
+== Using a custom backend
+
+== How it works
+
+Internally the filesystem uses a mutex to lock access to it.
