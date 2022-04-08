@@ -1,5 +1,5 @@
-import { Mutex, MutexFactory } from '@feather-ink/mutex'
+import { Mutex, MutexFactory } from '@ink-feather-org/ts-mutex'
 
-import Backend from './Backend'
+import { Backend } from './Backend'
 
-export default interface LockedBackend<T extends Mutex = Mutex> extends Backend, MutexFactory<T> {}
+export interface LockedBackend<T extends Mutex = Mutex> extends Backend, MutexFactory<T> {}

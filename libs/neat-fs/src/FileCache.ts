@@ -1,19 +1,19 @@
-import { Mutex } from '@feather-ink/mutex'
-import { PromiseChain } from '@feather-ink/ts-utils'
+import { Mutex } from '@ink-feather-org/ts-mutex'
+import { PromiseChain } from '@ink-feather-org/ts-utils'
 
 import { BackendFile, BackendLink, BackendMeta } from './backends/Backend'
-import CachedFile, { CachedFileType } from './CachedFile'
-import Path from './Path'
-import LockedBackend from './backends/LockedBackend'
-import FSCallback from './FSCallback'
+import { CachedFile, CachedFileType } from './CachedFile'
+import { Path } from './Path'
+import { LockedBackend } from './backends/LockedBackend'
+import { FSCallback } from './FSCallback'
 import { BasicFileEntry, FileEntry } from './FileEntry'
-import FileType from './FileType'
+import { FileType } from './FileType'
 import { FSError, FSErrorCode } from './FSError'
 
 /**
  * @internal
  */
-export default class FileCache {
+export class FileCache {
   private root?: CachedFile
 
   private promiseChain = new PromiseChain()
@@ -131,7 +131,7 @@ export default class FileCache {
   }
 
   private async resolveSymlink(filePath: string): Promise<CachedFile> {
-    const linkStack = [await this.getFile(filePath)]
+    const linkStack = [await this.getFile(filePath), ]
     while (linkStack.length < 64) {
       const file = linkStack.shift()!
       if (file.fileType !== CachedFileType.SYMLINK)
@@ -153,7 +153,7 @@ export default class FileCache {
         const symlinksToCreate = new Array<BackendLink>()
         const metaUpdates = new Array<BackendMeta>()
 
-        const folderStack = [this.root]
+        const folderStack = [this.root, ]
 
         while (folderStack.length) {
           const folder = folderStack.shift()!
@@ -169,7 +169,7 @@ export default class FileCache {
                   filesToDelete.push(file.filePath)
                 foldersToCreate.push({
                   filePath: file.filePath,
-                  meta: file.meta
+                  meta: file.meta,
                 })
 
                 folderStack.push(file)
@@ -181,7 +181,7 @@ export default class FileCache {
                 filesToWrite.push({
                   filePath: file.filePath,
                   data: await file.readFile(),
-                  meta: file.meta
+                  meta: file.meta,
                 })
                 break
               case CachedFileType.SYMLINK_DIRTY:
@@ -191,7 +191,7 @@ export default class FileCache {
                 symlinksToCreate.push({
                   filePath: file.filePath,
                   destination: file.symlink || '',
-                  meta: file.meta
+                  meta: file.meta,
                 })
                 break
               case CachedFileType.DIRECTORY:
@@ -202,7 +202,7 @@ export default class FileCache {
                 if (file.metaDirty)
                   metaUpdates.push({
                     filePath: file.filePath,
-                    meta: file.meta
+                    meta: file.meta,
                   })
                 break
               default:

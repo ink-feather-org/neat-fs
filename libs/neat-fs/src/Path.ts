@@ -1,10 +1,10 @@
-import NeatFS from './NeatFS'
+import { NeatFS } from './NeatFS'
 
 /**
  * https://nodejs.org/api/path.html
  * There is no type checking in place. Just be careful.
  */
-export default class Path {
+export class Path {
   constructor(private readonly neatFS: NeatFS) {}
 
   static readonly sep = '/'

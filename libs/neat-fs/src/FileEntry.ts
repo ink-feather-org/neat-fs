@@ -1,4 +1,4 @@
-import FileType from './FileType'
+import { FileType } from './FileType'
 
 /**
  * This should be shallow copyable.

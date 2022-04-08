@@ -55,22 +55,22 @@ export class FSError {
     Object.defineProperty(error, 'message', {
       get() {
         return message
-      }
+      },
     })
     Object.defineProperty(error, 'name', {
       get() {
         return 'FSError'
-      }
+      },
     })
     Object.defineProperty(error, 'code', {
       get(): FSErrorCode {
         return code
-      }
+      },
     })
     Object.defineProperty(error, 'filePath', {
       get(): string {
         return filePath
-      }
+      },
     })
     // capture where error occurred
     Error.captureStackTrace(error, FSError)

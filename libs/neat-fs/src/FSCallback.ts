@@ -1,6 +1,6 @@
-import FileType from './FileType'
+import { FileType } from './FileType'
 
-export default interface FSCallback {
+export interface FSCallback {
   onPossibleUnknownChanges?: () => void
   onFileContentsChanged?: (filePath: string, type: FileType) => void
   onFileDeleted?: (filePath: string) => void

@@ -17,6 +17,7 @@ importers:
       '@babel/runtime-corejs3': ^7.17.8
       '@ink-feather-org/eslint-config-shareable': ^1.0.9
       '@ink-feather-org/idb-mutex': ^1.0.1
+      '@ink-feather-org/neat-fs': workspace:*
       '@ink-feather-org/ts-mutex': ^1.0.1
       '@ink-feather-org/ts-utils': ^1.0.11
       '@ink-feather-org/typedoc-plugin-asciidoctor': 1.0.5
@@ -31,6 +32,7 @@ importers:
       eslint-plugin-promise: ^6.0.0
       eslint-webpack-plugin: ^3.1.1
       fork-ts-checker-webpack-plugin: ^7.2.1
+      idb: ^7.0.1
       npm-multi-publish: ^2.2.0
       shx: ^0.3.4
       terser-webpack-plugin: ^5.3.1
@@ -40,6 +42,7 @@ importers:
       webpack: ^5.71.0
       webpack-cli: ^4.9.2
     dependencies:
+      idb: 7.0.1
       tslib: 2.3.1
     devDependencies:
       '@babel/cli': 7.17.6_@babel+core@7.17.9
@@ -52,6 +55,7 @@ importers:
       '@babel/runtime-corejs3': 7.17.9
       '@ink-feather-org/eslint-config-shareable': 1.0.9_eslint@8.12.0
       '@ink-feather-org/idb-mutex': 1.0.1_7fd6789589606298f0d7e600a5673651
+      '@ink-feather-org/neat-fs': link:../../libs/neat-fs
       '@ink-feather-org/ts-mutex': 1.0.1_4ab39decf0bc465603fe1b089254a285
       '@ink-feather-org/ts-utils': 1.0.11_@babel+runtime-corejs3@7.17.9
       '@ink-feather-org/typedoc-plugin-asciidoctor': 1.0.5_typedoc@0.22.13
@@ -88,6 +92,7 @@ importers:
       '@ink-feather-org/ts-mutex': ^1.0.1
       '@ink-feather-org/ts-utils': ^1.0.11
       '@ink-feather-org/typedoc-plugin-asciidoctor': 1.0.5
+      '@types/node': ^17.0.23
       '@typescript-eslint/eslint-plugin': ^5.17.0
       '@typescript-eslint/parser': ^5.17.0
       babel-loader: ^8.2.4
@@ -122,6 +127,7 @@ importers:
       '@ink-feather-org/ts-mutex': 1.0.1_4ab39decf0bc465603fe1b089254a285
       '@ink-feather-org/ts-utils': 1.0.11_@babel+runtime-corejs3@7.17.9
       '@ink-feather-org/typedoc-plugin-asciidoctor': 1.0.5_typedoc@0.22.13
+      '@types/node': 17.0.23
       '@typescript-eslint/eslint-plugin': 5.18.0_a07dca3bdfc4bfa60f4dda0c1f9e3287
       '@typescript-eslint/parser': 5.18.0_eslint@8.12.0+typescript@4.6.3
       babel-loader: 8.2.4_7ee2ee6f8cbdc1e65df0788b3107bc6d
@@ -3484,7 +3490,6 @@ packages:
 
   /idb/7.0.1:
     resolution: {integrity: sha512-UUxlE7vGWK5RfB/fDwEGgRf84DY/ieqNha6msMV99UsEMQhJ1RwbCd8AYBj3QMgnE3VZnfQvm4oKVCJTYlqIgg==}
-    dev: true
 
   /ignore-walk/3.0.4:
     resolution: {integrity: sha512-PY6Ii8o1jMRA1z4F2hRkH/xN59ox43DavKvD3oDpfurRlOJyAHpifIwpbdv1n4jt4ov0jSpw3kQ4GhJnpBL6WQ==}

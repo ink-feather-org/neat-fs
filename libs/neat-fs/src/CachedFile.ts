@@ -1,7 +1,7 @@
-import Path from './Path'
-import Backend from './backends/Backend'
+import { Path } from './Path'
+import { Backend } from './backends/Backend'
 import { FileEntry, FileMeta } from './FileEntry'
-import FileType from './FileType'
+import { FileType } from './FileType'
 import { FSError, FSErrorCode } from './FSError'
 
 /**
@@ -20,7 +20,7 @@ export enum CachedFileType {
 /**
  * @internal
  */
-export default class CachedFile {
+export class CachedFile {
   private newFileType: CachedFileType
 
   private data?: Uint8Array
@@ -43,7 +43,7 @@ export default class CachedFile {
    */
   get meta(): FileMeta {
     // shallow copy
-    return { ...this._meta }
+    return { ...this._meta, }
   }
 
   set mtime(mtime: number) {
@@ -165,7 +165,7 @@ export default class CachedFile {
     const children = await this.retrieveChildren()
     let newNode = children.find(el => el.filename === filename)
     if (!newNode) {
-      newNode = new CachedFile(this.backend, this, filename, Path.join(this.filePath, filename), CachedFileType.NONEXISTENT, { mtime: 0 })
+      newNode = new CachedFile(this.backend, this, filename, Path.join(this.filePath, filename), CachedFileType.NONEXISTENT, { mtime: 0, })
       children.push(newNode)
     }
     return newNode
@@ -208,7 +208,7 @@ export default class CachedFile {
       fileType,
       filename: this.filename,
       destination: this.destination,
-      meta: this.meta
+      meta: this.meta,
     }
   }
 

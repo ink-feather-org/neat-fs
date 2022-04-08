@@ -75,7 +75,8 @@
     "terser-webpack-plugin": "^5.3.1",
     "@ink-feather-org/ts-utils": "^1.0.11",
     "@ink-feather-org/ts-mutex": "^1.0.1",
-    "@ink-feather-org/typedoc-plugin-asciidoctor": "1.0.5"
+    "@ink-feather-org/typedoc-plugin-asciidoctor": "1.0.5",
+    "@types/node": "^17.0.23"
   },
   "dependencies": {
     "tslib": "^2.3.1"
@@ -84,5 +85,8 @@
     "@babel/runtime-corejs3": "^7.17.8",
     "@ink-feather-org/ts-utils": "^1.0.11",
     "@ink-feather-org/ts-mutex": "^1.0.1"
+  },
+  "engines": {
+    "node": ">= 10"
   }
 }

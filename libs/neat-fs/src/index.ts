@@ -1,38 +1,15 @@
-import NeatFS from './NeatFS'
+export * from './NeatFS'
 
-import Backend, { BackendLink, BackendFile, BackendMeta } from './backends/Backend'
-import LockedBackend from './backends/LockedBackend'
-import RAMBackend from './backends/RAMBackend'
+export * from './backends/Backend'
+export * from './backends/LockedBackend'
+export * from './backends/RAMBackend'
 
-import NodeLikePromiseFS from './NodeLikePromiseFS'
-import NodeLikeFS from './NodeLikeFS'
+export * from './NodeLikePromiseFS'
+export * from './NodeLikeFS'
 
-import FSCallback from './FSCallback'
-import FileType from './FileType'
-import { FileEntry, BasicFileEntry, FileMeta } from './FileEntry'
-import Path from './Path'
+export * from './FSCallback'
+export * from './FileType'
+export * from './FileEntry'
+export * from './Path'
 
-import { FSError, FSErrorCode, isFSError } from './FSError'
-
-export {
-  NeatFS,
-  Backend,
-  BackendLink,
-  BackendFile,
-  BackendMeta,
-  LockedBackend,
-  RAMBackend,
-  NodeLikePromiseFS,
-  NodeLikeFS,
-  FSCallback,
-  FileType,
-  FileEntry,
-  BasicFileEntry,
-  FileMeta,
-  Path,
-  FSError,
-  FSErrorCode,
-  isFSError
-}
-
-export default NeatFS
+export * from './FSError'

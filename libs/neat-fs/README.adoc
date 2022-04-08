@@ -11,6 +11,10 @@ A neat and fast 'fs' for the browser.
 
 == Using a custom backend
 
+== Browser path
+
+== Which mutex to use?
+
 == How it works
 
 Internally the filesystem uses a mutex to lock access to it.

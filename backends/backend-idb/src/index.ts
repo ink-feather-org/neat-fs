@@ -1,3 +1,1 @@
-import IDBBackend from './IDBBackend'
-
-export default IDBBackend
+export * from './IDBBackend'

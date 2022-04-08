@@ -1,18 +1,18 @@
-import { FakeMutex } from '@feather-ink/mutex'
-import { GeneralAsyncFunction } from '@feather-ink/ts-utils'
+import { FakeMutex } from '@ink-feather-org/ts-mutex'
+import { GeneralAsyncFunction } from '@ink-feather-org/ts-utils'
 
-import NodeLikeFS from './NodeLikeFS'
-import FSCallback from './FSCallback'
-import FileCache from './FileCache'
-import LockedBackend from './backends/LockedBackend'
-import FileType from './FileType'
+import { NodeLikeFS } from './NodeLikeFS'
+import { FSCallback } from './FSCallback'
+import { FileCache } from './FileCache'
+import { LockedBackend } from './backends/LockedBackend'
+import { FileType } from './FileType'
 import { BasicFileEntry, FileEntry } from './FileEntry'
-import RAMBackend from './backends/RAMBackend'
-import NodeLikePromiseFS from './NodeLikePromiseFS'
-import Path from './Path'
+import { RAMBackend } from './backends/RAMBackend'
+import { NodeLikePromiseFS } from './NodeLikePromiseFS'
+import { Path } from './Path'
 import { FSError, FSErrorCode } from './FSError'
 
-export default class NeatFS {
+export class NeatFS {
   private _fs: NodeLikeFS | undefined
 
   get fs(): NodeLikeFS {
@@ -226,9 +226,9 @@ export default class NeatFS {
   }
 
   async wipe() {
-    const paths = await this.readDir('/', { paths: true })
+    const paths = await this.readDir('/', { paths: true, })
     for (const path of paths)
-      await this.rm(path, { folder: true, recursive: true })
+      await this.rm(path, { folder: true, recursive: true, })
   }
 
   linfo(filePath: string): Promise<FileEntry | undefined> {
@@ -270,7 +270,7 @@ export default class NeatFS {
 
     return this.wrap(async () => {
       await this.copy(source, target, options)
-      await this.rm(source, { recursive: true, folder: true })
+      await this.rm(source, { recursive: true, folder: true, })
     })
   }
 
@@ -284,7 +284,7 @@ export default class NeatFS {
       const srcFilePathSplit = Path.split(source)
       const newFilePathSplit = Path.split(target)
       let nested = true
-      for (const [it, path] of srcFilePathSplit.entries())
+      for (const [it, path, ] of srcFilePathSplit.entries())
         if (path !== newFilePathSplit[it]) {
           nested = false
           break
@@ -310,7 +310,7 @@ export default class NeatFS {
     // Don't use wrap here! If the users callback blocks the fileCache would never be committed
     filePath = this.Path.resolve(filePath)
 
-    const fileStack = [await this.fileCache.linfo(filePath)]
+    const fileStack = [await this.fileCache.linfo(filePath), ]
     while (fileStack.length) {
       const entry = fileStack.shift()!
 

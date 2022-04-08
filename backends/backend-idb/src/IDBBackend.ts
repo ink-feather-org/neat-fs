@@ -1,9 +1,11 @@
-import { IDBPDatabase, IDBPObjectStore } from 'idb/with-async-ittr-cjs'
+import { IDBPDatabase, IDBPObjectStore } from 'idb/with-async-ittr'
+
+type MObjectStore = IDBPObjectStore<unknown, string[], string, 'readwrite'>
 
 import {
   Path, LockedBackend, FileType, FileEntry, BackendFile, BackendLink, BackendMeta, FileMeta
-} from '@feather-ink/neat-fs'
-import { MutexFactoryProxy, MutexFactory } from '@feather-ink/mutex'
+} from '@ink-feather-org/neat-fs'
+import { MutexFactoryProxy, MutexFactory } from '@ink-feather-org/ts-mutex'
 
 interface InodeData {
   type: FileType
@@ -20,14 +22,14 @@ interface InodeData {
  * one for the files
  * one for the file data
  */
-export default class IDBBackend extends MutexFactoryProxy implements LockedBackend {
+export class IDBBackend extends MutexFactoryProxy implements LockedBackend {
   constructor(mutexFactory: MutexFactory, private readonly db: IDBPDatabase, private readonly nodeStoreName: string, private readonly dataStoreName: string) {
     super(mutexFactory)
   }
 
-  private static async delete(filePath: string, nodeStore: IDBPObjectStore, dataStore: IDBPObjectStore) {
-    const toBeDeleted = [filePath]
-    const folderStack = [filePath]
+  private static async delete(filePath: string, nodeStore: MObjectStore, dataStore: MObjectStore) {
+    const toBeDeleted = [filePath, ]
+    const folderStack = [filePath, ]
     while (folderStack.length) {
       const folderPath = folderStack.shift()!
       const folder = await nodeStore.get(folderPath) as InodeData | undefined
@@ -47,7 +49,7 @@ export default class IDBBackend extends MutexFactoryProxy implements LockedBacke
     await this.modifyFile(filePath, true, nodeStore)
   }
 
-  private static async modifyFile(filePath: string, deleted: boolean, nodeStore: IDBPObjectStore) {
+  private static async modifyFile(filePath: string, deleted: boolean, nodeStore: MObjectStore) {
     const pathSplit = Path.split(Path.dirname(filePath))
     pathSplit.shift()
 
@@ -57,7 +59,7 @@ export default class IDBBackend extends MutexFactoryProxy implements LockedBacke
       root = new class implements InodeData {
         type = FileType.DIRECTORY
 
-        meta = { mtime: 0 }
+        meta = { mtime: 0, }
       }()
       await nodeStore.add(root, '/')
     }
@@ -86,8 +88,8 @@ export default class IDBBackend extends MutexFactoryProxy implements LockedBacke
     await nodeStore.put(node, currentPath)
   }
 
-  private static async mkDir(folder: BackendMeta, nodeStore: IDBPObjectStore) {
-    const { filePath, meta } = folder
+  private static async mkDir(folder: BackendMeta, nodeStore: MObjectStore) {
+    const { filePath, meta, } = folder
     if (await nodeStore.get(filePath))
       throw Error('EEXIST')
     await this.modifyFile(filePath, false, nodeStore)
@@ -98,8 +100,8 @@ export default class IDBBackend extends MutexFactoryProxy implements LockedBacke
     }(), filePath)
   }
 
-  private static async mkLnk(link: BackendLink, nodeStore: IDBPObjectStore) {
-    const { destination, filePath, meta } = link
+  private static async mkLnk(link: BackendLink, nodeStore: MObjectStore) {
+    const { destination, filePath, meta, } = link
     if (await nodeStore.get(filePath))
       throw Error('EEXIST')
     await this.modifyFile(filePath, false, nodeStore)
@@ -112,8 +114,8 @@ export default class IDBBackend extends MutexFactoryProxy implements LockedBacke
     }())
   }
 
-  private static async writeFile(file: BackendFile, nodeStore: IDBPObjectStore, dataStore: IDBPObjectStore) {
-    const { filePath, data, meta } = file
+  private static async writeFile(file: BackendFile, nodeStore: MObjectStore, dataStore: MObjectStore) {
+    const { filePath, data, meta, } = file
     await this.modifyFile(filePath, false, nodeStore)
 
     const nodeData = await nodeStore.get(filePath) as InodeData | undefined
@@ -128,8 +130,8 @@ export default class IDBBackend extends MutexFactoryProxy implements LockedBacke
     await dataStore.put(data, filePath)
   }
 
-  private static async meta(metaUpdate: BackendMeta, nodeStore: IDBPObjectStore) {
-    const { filePath, meta } = metaUpdate
+  private static async meta(metaUpdate: BackendMeta, nodeStore: MObjectStore) {
+    const { filePath, meta, } = metaUpdate
 
     const nodeData = await nodeStore.get(filePath) as InodeData | undefined
     if (!nodeData)
@@ -140,7 +142,7 @@ export default class IDBBackend extends MutexFactoryProxy implements LockedBacke
   }
 
   async bulk(filesToDelete: string[], foldersToCreate: BackendMeta[], filesToWrite: BackendFile[], symlinksToCreate: BackendLink[], metaUpdates: BackendMeta[]): Promise<void> {
-    const tx = this.db.transaction([this.nodeStoreName, this.dataStoreName], 'readwrite')
+    const tx = this.db.transaction([this.nodeStoreName, this.dataStoreName, ], 'readwrite')
     const nodeStore = tx.objectStore(this.nodeStoreName)
     const dataStore = tx.objectStore(this.dataStoreName)
 
@@ -181,14 +183,14 @@ export default class IDBBackend extends MutexFactoryProxy implements LockedBacke
           filename: Path.basename(path),
           filePath: path,
           fileType: child.type,
-          meta: child.meta
+          meta: child.meta,
         })
     }
     return children
   }
 
   async readFile(filePath: string): Promise<Uint8Array> {
-    const tx = this.db.transaction([this.nodeStoreName, this.dataStoreName], 'readonly')
+    const tx = this.db.transaction([this.nodeStoreName, this.dataStoreName, ], 'readonly')
     const nodeStore = tx.objectStore(this.nodeStoreName)
     const dataStore = tx.objectStore(this.dataStoreName)
     const file = await nodeStore.get(filePath) as InodeData | undefined
@@ -210,7 +212,7 @@ export default class IDBBackend extends MutexFactoryProxy implements LockedBacke
       filePath,
       destination: file.destination,
       filename: Path.basename(filePath),
-      meta: file.meta
+      meta: file.meta,
     }
   }
 }

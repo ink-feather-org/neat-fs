@@ -1,6 +1,6 @@
 import { FileEntry, FileMeta } from '../FileEntry'
 
-export default interface Backend {
+export interface Backend {
   readFile(filePath: string): Promise<Uint8Array>
 
   /**
@@ -14,8 +14,8 @@ export default interface Backend {
   linfo(filePath: string): Promise<FileEntry | undefined>
 
   /**
-   * The bulk functions arguments have to fulfill the following requirements or the function may misbehave.
-   * The meta objects are safe to store. They won't be modified anymore.
+   * The bulk functions arguments have to fulfil the following requirements or the function may misbehave.
+   * The meta objects are safe to store. They won't be modified any more.
    * @param filesToDelete If a file is deleted or its type changes or a symlinks target changes it has to be added to this list. Folders are deleted recursively their contents must not be in this list.
    * @param foldersToCreate Folders are not created recursively all parents must be in this list. The order is important too. The parents have to be listed before the children.
    * @param filesToWrite The folder for the files have to exist. Existing files are overwritten.

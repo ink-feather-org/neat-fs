@@ -3,8 +3,8 @@ import { describe, it } from 'mocha'
 import assert from 'assert'
 import Path from 'path'
 
-import NeatFS from '../src/NeatFS'
-import MyPath from '../src/Path'
+import { NeatFS } from '../src/NeatFS'
+import { Path as MyPath } from '../src/Path'
 
 /**
  * NodeJS path compliance tests.
@@ -20,23 +20,23 @@ describe('Path', () => {
       console.log(output)
       assert.deepStrictEqual(output, expected)
     }
-    test('', ['.'])
-    test('.', ['.'])
-    test('/', ['/'])
-    test('./', ['.'])
-    test('../', ['.', '..'])
-    test('//', ['/'])
-    test('///', ['/'])
-    test('a', ['.', 'a'])
-    test('./a', ['.', 'a'])
-    test('.a', ['.', '.a'])
-    test('/a', ['/', 'a'])
-    test('oof/boi', ['.', 'oof', 'boi'])
-    test('oof/boi/', ['.', 'oof', 'boi'])
-    test('/oof/boi', ['/', 'oof', 'boi'])
-    test('/oof/boi/', ['/', 'oof', 'boi'])
-    test('oof//boi', ['.', 'oof', 'boi'])
-    test('oof///boi', ['.', 'oof', 'boi'])
+    test('', ['.', ])
+    test('.', ['.', ])
+    test('/', ['/', ])
+    test('./', ['.', ])
+    test('../', ['.', '..', ])
+    test('//', ['/', ])
+    test('///', ['/', ])
+    test('a', ['.', 'a', ])
+    test('./a', ['.', 'a', ])
+    test('.a', ['.', '.a', ])
+    test('/a', ['/', 'a', ])
+    test('oof/boi', ['.', 'oof', 'boi', ])
+    test('oof/boi/', ['.', 'oof', 'boi', ])
+    test('/oof/boi', ['/', 'oof', 'boi', ])
+    test('/oof/boi/', ['/', 'oof', 'boi', ])
+    test('oof//boi', ['.', 'oof', 'boi', ])
+    test('oof///boi', ['.', 'oof', 'boi', ])
   })
 
   it('isNormalized', () => {

@@ -1,9 +1,9 @@
-import { MutexFactoryProxy } from '@feather-ink/mutex'
+import { MutexFactoryProxy } from '@ink-feather-org/ts-mutex'
 
-import LockedBackend from './LockedBackend'
+import { LockedBackend } from './LockedBackend'
 import { BackendFile, BackendLink, BackendMeta } from './Backend'
-import Path from '../Path'
-import FileType from '../FileType'
+import { Path } from '../Path'
+import { FileType } from '../FileType'
 import { FileEntry, FileMeta } from '../FileEntry'
 import { FSError, FSErrorCode } from '../FSError'
 
@@ -24,7 +24,7 @@ class Node {
    */
   get meta(): FileMeta {
     // shallow copy
-    return { ...this._meta }
+    return { ...this._meta, }
   }
 
   /**
@@ -104,7 +104,7 @@ class Node {
       filePath: el.filePath,
       fileType: el.fileType,
       // copy meta
-      meta: el.meta
+      meta: el.meta,
     }))
   }
 
@@ -134,8 +134,8 @@ class Node {
   }
 }
 
-export default class RAMBackend extends MutexFactoryProxy implements LockedBackend {
-  private readonly root = new Node('', '/', FileType.DIRECTORY, { mtime: 0 })
+export class RAMBackend extends MutexFactoryProxy implements LockedBackend {
+  private readonly root = new Node('', '/', FileType.DIRECTORY, { mtime: 0, })
 
   private getFile(filePath: string): Node {
     const splitPath = Path.split(filePath)
@@ -188,7 +188,7 @@ export default class RAMBackend extends MutexFactoryProxy implements LockedBacke
 
   async linfo(filePath: string): Promise<FileEntry> {
     const {
-      fileType, filename, destination, meta
+      fileType, filename, destination, meta,
     } = this.getFile(filePath)
     // console.log(meta)
     return {
@@ -197,7 +197,7 @@ export default class RAMBackend extends MutexFactoryProxy implements LockedBacke
       destination,
       fileType,
       // meta copied
-      meta
+      meta,
     }
   }
 }

@@ -1,5 +1,5 @@
 /* eslint-disable promise/no-callback-in-promise */
-import NodeLikePromiseFS from './NodeLikePromiseFS'
+import { NodeLikePromiseFS } from './NodeLikePromiseFS'
 
 export interface ReadFileOptions {
   encoding?: 'utf8'
@@ -24,7 +24,7 @@ export interface MKDirOptions {
   recursive?: boolean
 }
 
-export default class NodeLikeFS {
+export class NodeLikeFS {
   constructor(readonly promises: NodeLikePromiseFS) {}
 
   mkdir(filePath: string, options: MKDirOptions | undefined, cb: (err?: any) => void) {

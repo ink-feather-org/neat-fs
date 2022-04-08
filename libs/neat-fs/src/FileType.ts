@@ -1,7 +1,5 @@
-enum FileType {
+export enum FileType {
   DIRECTORY,
   FILE,
   SYMLINK
 }
-
-export default FileType

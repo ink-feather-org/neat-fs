@@ -1,10 +1,10 @@
-import NeatFS from './NeatFS'
+import { NeatFS } from './NeatFS'
 import { MKDirOptions, ReadFileOptions, Stats } from './NodeLikeFS'
-import FileType from './FileType'
+import { FileType } from './FileType'
 import { FileEntry } from './FileEntry'
 import { FSError, FSErrorCode } from './FSError'
 
-export default class NodeLikePromiseFS {
+export class NodeLikePromiseFS {
   constructor(private readonly neatFS: NeatFS) {}
 
   mkdir(filePath: string, options?: MKDirOptions): Promise<void> {
@@ -17,7 +17,7 @@ export default class NodeLikePromiseFS {
       throw new FSError(FSErrorCode.ENOENT, filePath)
     if (info.fileType !== FileType.DIRECTORY)
       throw new FSError(FSErrorCode.ENOTDIR, filePath)
-    return this.neatFS.rm(filePath, { recursive: false, folder: true })
+    return this.neatFS.rm(filePath, { recursive: false, folder: true, })
   }
 
   readdir(filePath: string, options?: any): Promise<string[]> {
