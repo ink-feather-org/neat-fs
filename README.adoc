@@ -8,9 +8,9 @@ You can find them in the `libs` and the `backends` folders.
 == packages
 
 * neat-fs
-  https://github.com/ink-feather-org/neat-fs/blob/gh-pages/libs/neat-fs/README.adoc[README]
+  https://github.com/ink-feather-org/neat-fs/tree/main/libs/neat-fs[README]
   https://ink-feather-org.github.io/neat-fs/libs/neat-fs/docs/[Typedoc]
-* neat-fs-backend-idb https://github.com/ink-feather-org/neat-fs/blob/gh-pages/backends/backend-idb/README.adoc[README]
+* neat-fs-backend-idb https://github.com/ink-feather-org/neat-fs/tree/main/backends/backend-idb[README]
   https://ink-feather-org.github.io/neat-fs/backends/backend-idb/docs/[Typedoc]
 
 == Building
